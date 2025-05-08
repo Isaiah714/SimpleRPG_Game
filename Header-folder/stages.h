@@ -1,6 +1,9 @@
 #ifndef STAGES_H
 #define STAGES_H
 
+#include <vector>
+#include <string>
+
 bool plains();
 
 bool forest();
@@ -8,9 +11,6 @@ bool forest();
 bool cave();
 
 bool the_shore();
-
-#include <vector>
-#include <string>
 
 class enemy_Type {
 public:
