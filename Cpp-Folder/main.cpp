@@ -5,7 +5,7 @@
 #include "items.h"
 #include "ASCII_icons.h"
 
-int main(int argc, char* argv[]) {
+int main() {
 	
 	std::vector<std::string> enemyEncounter = {"slime", "zombie", "insect", "pirate"};
 	int stageNumber = 0;
