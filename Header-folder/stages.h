@@ -22,6 +22,8 @@ public:
 
 	std::vector<std::string> pirateType{ "Pirate Swordsman", "Pirate Gunslinger", "Pirate Marksman", "Pirate Artillery" };
 
+private:
+  std::array<std::string> enemy__;
 };
 
 
@@ -30,7 +32,7 @@ public:
 	enemy(const std::string& enemy) : enemy_(enemy) {};
 
 private:
-	std::string enemy_;
+	std::vector<Enemy> enemy_stats__;
 };
 
 #endif
