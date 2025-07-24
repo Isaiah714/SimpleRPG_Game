@@ -22,11 +22,11 @@ bool cave();
 
 bool the_shore();
 
-class enemy_Type {
+class Plains {
 public:
 	
 private:
-  std::array<std::string> enemy__;
+  std::array<std::string> slime__;
 };
 
 class slimeType
