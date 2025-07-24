@@ -24,9 +24,10 @@ bool the_shore();
 
 class Plains {
 public:
+
 	
 private:
-  std::array<std::string> slime__;
+  std::array<PlainEnemies> plain_enemy__; 
 };
 
 class slimeType
