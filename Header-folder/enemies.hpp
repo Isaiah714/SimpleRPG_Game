@@ -1,5 +1,5 @@
-#ifndef __Enemy__
-#define __Enemy__
+#ifndef __ENEMIES_H__
+#define __ENEMIES_H__
 
 #include <array>
 #include <string>
