@@ -27,7 +27,7 @@ public:
 
 	
 private:
-  std::array<PlainEnemies> plain_enemy__; 
+  //std::array<PlainEnemies> plain_enemy__; 
 };
 
 class slimeType

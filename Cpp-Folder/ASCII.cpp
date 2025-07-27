@@ -1,42 +1,49 @@
-#include <iostream>
+#include "ASCII_animation.hpp"
 
-#include "ASCII_icons.h"
+Frame::Frame( const std::string & filePath ) : filePath__{filePath}{}
 
-void playerIcon() {
-	std::cout << "  O" << "\n"
-			  << " /|\\" << "\n"
-			  << " / \\" << std::endl;
+Frame::~Frame() noexcept {};
+
+std::string Frame::getFrame() const
+{
+  return frameBuffer__;
 }
 
-void slime() {
-	std::cout << "   ________" << "\n"
-			  << "  |        |" << "\n"
-			  << " |          |" << "\n"
-		      << " ------------" << std::endl;
+void Frame::readFile()
+{
+  // use seekg() to start where the program left off
+	
+  std::ifstream frameFile{};
+  std::streampos framePoint{};
+  std::stringstream fileStream{};
+  std::string fileLine;
 
+  frameFile.exceptions( std::ifstream::failbit | std::ifstream::badbit );
 
+  try
+  {
+	frameFile.open( filePath__ );
+
+	for( int i = 0; i < FRAME_LINES_PLAINS && getline( frameFile, fileLine ); ++i )
+	{
+	  fileStream << fileLine << '\n';
+	}
+
+	frameBuffer__ = fileStream.str();
+    
+	// Saves the position of where the program stopped reading the file.
+	framePoint = frameFile.tellg();
+
+	frameFile.close();
+  }
+  catch( std::ifstream::failure error )
+  {
+	std::cerr << "Failed to open/interact with the file." << '\n';
+  }
 }
 
-void zombie() {
-	std::cout << "   0" << "\n"
-			  << " ~~|" << "\n"
-			  << "  / \\" << std::endl;
-}
-
-void message() {
-	std::cout << "        ___                                           ___" << "\n"
-			  << "       |   |                                         |   |" << "\n"
-			  << "       |   |                                         |   |" << "\n"
-			  << " ------     ------                             ------     ------ " << "\n"
-			  << "|                 | Do you have the Blessing? |                 |" << "\n"
-			  << " ------     ------                             ------     ------ " << "\n"
-			  << "       |   |                                         |   |" << "\n"
-			  << "       |   |                                         |   |" << "\n"
-			  << "       |   |                                         |   |" << "\n"
-			  << "       |   |                                         |   |" << "\n"
-			  << "        ---                                           ---" << std::endl;
-
-	std::cout << "Fight your way through different stages while obtaining " 
-			  << "various items to help you along your journey to survive " 
-			  << "until the end, good luck!" << std::endl;
+std::string Frame::displayFrame()
+{
+  readFile();
+  return frameBuffer__;
 }

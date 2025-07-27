@@ -33,6 +33,14 @@ typedef struct ArmorItem
   int steel_armor = 12;
 } Armor;
 
+typedef struct ShieldItem
+{
+  int old_shield = 2;
+  int wood_shield = 4;
+  int bronze_shield = 6;
+  int steel_shield = 8;
+} Shield;
+
 class UseItem
 {
   public:
