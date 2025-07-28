@@ -6,24 +6,40 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <chrono>
+#include <thread>
 
-#define FRAME_LINES_PLAINS 21
+#define TEXT_LINES_PLAINS 21
+
+class CollectFrames
+{
+  public:
+  CollectFrames();
+ ~CollectFrames() noexcept;
+
+  std::string getCollectFrame();
+  void setCollectFrame( const std::string  & oneFrame );
+
+  private:
+  std::string collectFrame__;
+};
 
 class Frame
 {
   public:
+  Frame();
   Frame( const std::string & filePath );
  ~Frame() noexcept;
-  
-  std::string getFrame() const;
-  std::string displayFrame();
 
- private:
- std::string frameBuffer__;
- const std::string filePath__;
+  void displayFrame();
 
- void readFile();
+  private:
+  const std::string filePath__;
+  std::string loopCondition__;
+  std::string frameBuffer__;
 
+  std::vector<CollectFrames> allFrames__;
+  std::string readFile();
 };
 
 #endif

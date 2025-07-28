@@ -4,7 +4,7 @@
 int main()
 {
   Frame obj("../ASCII-Frames/Plains/Slime_Encounter.txt");
-  std::cout << obj.displayFrame() << '\n';
+  obj.displayFrame();
   
   return 0;
 }
