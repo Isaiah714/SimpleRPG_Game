@@ -11,17 +11,15 @@
 
 #define TEXT_LINES_PLAINS 21
 
-class CollectFrames
+class FrameContainer
 {
   public:
-  CollectFrames();
- ~CollectFrames() noexcept;
+  FrameContainer();
+ ~FrameContainer() noexcept;
 
-  std::string getCollectFrame();
-  void setCollectFrame( const std::string  & oneFrame );
+  void setFrame( const std::string & collectedFrame );
 
-  private:
-  std::string collectFrame__;
+  std::string frame;
 };
 
 class Frame
@@ -31,15 +29,18 @@ class Frame
   Frame( const std::string & filePath );
  ~Frame() noexcept;
 
-  void displayFrame();
+  friend std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer);
 
   private:
   const std::string filePath__;
-  std::string loopCondition__;
   std::string frameBuffer__;
+  bool runLoop__;
+    std::streampos framePoint__;
 
-  std::vector<CollectFrames> allFrames__;
+  std::vector<FrameContainer> allFrames__;
+
   std::string readFile();
+  void collectFrame();
 };
 
 #endif

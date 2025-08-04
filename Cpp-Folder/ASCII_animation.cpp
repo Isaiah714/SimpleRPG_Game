@@ -1,17 +1,12 @@
 #include "ASCII_animation.hpp"
 
-CollectFrames::CollectFrames() {}
+FrameContainer::FrameContainer() {}
 
-CollectFrames::~CollectFrames() noexcept {}
+FrameContainer::~FrameContainer() noexcept {}
 
-std::string CollectFrames::getCollectFrame()
+void FrameContainer::setFrame( const std::string & collectedFrame )
 {
-  return collectFrame__;
-}
-
-void CollectFrames::setCollectFrame( const std::string & oneFrame )
-{
-  collectFrame__ = oneFrame;
+  frame = collectedFrame;
 }
 
 Frame::Frame( const std::string & filePath ) : filePath__{ filePath }{}
@@ -21,30 +16,27 @@ Frame::~Frame() noexcept {};
 std::string Frame::readFile()
 {
   // use seekg() to start where the program left off
-  std::ifstream frameFile( filePath__, std::ios::out );
-  std::streampos framePoint{};
+  std::ifstream frameFile( filePath__, std::ios::in );
   std::stringstream fileStream{};
   std::string fileLine;
 
   frameFile.exceptions( std::ifstream::failbit | std::ifstream::badbit );
-
   try
   {
-    while( true )
+    while( runLoop__ )
     {
-      frameFile.seekg( framePoint );
-
       if( !frameFile.is_open() )
       {
         std::cerr << "Failed to open the file" << std::endl;
       }
 
+      frameFile.seekg( framePoint__ );
+
       if( frameFile.eof() )
       {
-        loopCondition__ = "END";
-        break;
+        runLoop__ = false;
       }
-  
+
 	    for( int i = 0; i < TEXT_LINES_PLAINS && getline( frameFile, fileLine ); ++i )
 	    {
 	      fileStream << fileLine << '\n';
@@ -52,70 +44,40 @@ std::string Frame::readFile()
 
       frameBuffer__ = fileStream.str();
 
-      framePoint = frameFile.tellg();
+      framePoint__ = frameFile.tellg();
 
 	    frameFile.close();
     }
-    catch( std::ifstream::failure error )
-    {
-	    std::cerr << "Failed to open/interact with the file." << '\n';
-    }
+  }
+  catch( std::ifstream::failure error )
+  {
+	  std::cerr << "Failed to read/write to the file." << '\n' << "Error: " << error.what() << '\n';
   }
   return frameBuffer__;
 }
 
-void Frame::displayFrame()
+std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer )
 {
-  int i{};
-  CollectFrames frame;
-  while( loopCondition__ != "END" )
+  frameBuffer.collectFrame();
+  int incrementFrame{};
+  while( true )
   {
-    frame.setCollectFrame( readFile() );
-    allFrames__.push_back( frame );
-    // ANSI escape code to clear terminal and move cursor on top
-    // Basically clears the terminal
-    //std::cout << "\x1B[2J\x1B[H";
-    std::cout << allFrames__.at( i ).getCollectFrame() << '\n';
-    ++i;
-
-    if( i == 3 ) { break; }
-    // Adds a delay before the terminal clears 
-    //std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::cout << "\x1B[2J\x1B[H";
+    stream << frameBuffer.allFrames__.at( incrementFrame ).frame << '\n';
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    ++incrementFrame;
+    if( incrementFrame == 3 ) { incrementFrame = 0; }
   }
-
-  return;
+  return stream;
 }
 
-/*
-#include <iostream>
-#include <string>
-#include <chrono>
-#include <thread>
-#include <cstdlib> // For system("cls") or system("clear")
-
-int main() {
-    std::string frame1 = "  O\n /|\\\n / \\";
-    std::string frame2 = "  o\n -|\\\n / \\"; // Slightly different for animation
-
-    for (int i = 0; i < 10; ++i) { // Animate for 10 cycles
-        // Clear screen
-        #ifdef _WIN32
-            system("cls");
-        #else
-            std::cout << "\x1B[2J\x1B[H"; // ANSI escape codes: clear screen + move cursor to top
-        #endif
-
-        // Print frame
-        if (i % 2 == 0) {
-            std::cout << frame1 << std::endl;
-        } else {
-            std::cout << frame2 << std::endl;
-        }
-
-        // Delay
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    }
-
-    return 0;
+void Frame::collectFrame()
+{
+  FrameContainer collectFrame;
+  for( int i = 0; i < 3; ++i )
+  {
+    std::string eachFrame = readFile();
+    collectFrame.setFrame( eachFrame );
+    allFrames__.push_back( collectFrame );
+  }
 }
-*/
