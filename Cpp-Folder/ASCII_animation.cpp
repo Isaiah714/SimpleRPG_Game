@@ -63,14 +63,14 @@ std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer )
   {
     std::cout << "\x1B[2J\x1B[H";
     stream << frameBuffer.allFrames__.at( incrementFrame ).frame;
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for( std::chrono::milliseconds( 200 ) );
     ++incrementFrame;
     if( incrementFrame == frameBuffer.allFrames__.size() ) { incrementFrame = 0; }
   }
   return stream;
 }
 
-void Frame::collectFrame()
+void Frame::testFunction()
 {
   readFile();
     std::cout << allFrames__.at( 2 ).frame << '\n';

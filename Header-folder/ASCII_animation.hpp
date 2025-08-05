@@ -31,7 +31,7 @@ class Frame
 
   friend std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer);
 
-  void collectFrame();
+  void testFunction();
 
   private:
   const std::string filePath__;

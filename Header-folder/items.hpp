@@ -1,13 +1,28 @@
 #ifndef __ITEMS_H__
 #define __ITEMS_H__
 
-typedef struct MeleeItem
+#include <array>
+#include <memory>
+
+#include "randomgenerator.hpp"
+
+
+class MeleeItem
 {
-  int hammer = 2;
-  int straight_sword = 4;
-  int great_sword = 6;
-  int mace = 3;
-} Melee;
+  public:
+  MeleeItem( const int hammer, const int straightSword, const int greatSword, const int mace);
+  const int getMeleeItem( const int randomMeleeItem ) const;
+  const int getMeleeDamage() const;
+
+  private:
+  const int hammer__ = 2;
+  const int straightSword__ = 4;
+  const int greatSword__ = 6;
+  const int mace__ = 3;
+
+  std::array<std::unique_ptr<int>, 4> meleeItems;
+  std::array<std::unique_ptr<int>, 4> storeMeleeItems();
+};
 
 typedef struct RangeItem
 {
@@ -51,10 +66,5 @@ class UseItem
   private:
   int randomItemSelector();
 };
-
-/* Create another class that would select a random item for the player
- * Then create the a small menu for the player to select of what to do        
- *  
- */
 
 #endif
