@@ -9,7 +9,7 @@
 #include <chrono>
 #include <thread>
 
-#define TEXT_LINES_PLAINS 21
+#define FRAME_SIZE 21
 
 class FrameContainer
 {
@@ -31,16 +31,17 @@ class Frame
 
   friend std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer);
 
+  void collectFrame();
+
   private:
   const std::string filePath__;
   std::string frameBuffer__;
   bool runLoop__;
-    std::streampos framePoint__;
 
   std::vector<FrameContainer> allFrames__;
 
-  std::string readFile();
-  void collectFrame();
+  void readFile();
+  //void collectFrame();
 };
 
 #endif
