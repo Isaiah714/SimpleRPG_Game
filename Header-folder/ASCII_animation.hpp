@@ -41,7 +41,6 @@ class Frame
   std::vector<FrameContainer> allFrames__;
 
   void readFile();
-  //void collectFrame();
 };
 
 #endif
