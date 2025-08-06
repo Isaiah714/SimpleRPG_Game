@@ -3,34 +3,19 @@
 
 #include <array>
 #include <memory>
+#include <map>
 
 #include "randomgenerator.hpp"
 
 
-class MeleeItem
+class WeaponItem : public Random
 {
   public:
-  MeleeItem( const int hammer, const int straightSword, const int greatSword, const int mace);
-  const int getMeleeItem( const int randomMeleeItem ) const;
-  const int getMeleeDamage() const;
-
-  private:
-  const int hammer__ = 2;
-  const int straightSword__ = 4;
-  const int greatSword__ = 6;
-  const int mace__ = 3;
-
-  std::array<std::unique_ptr<int>, 4> meleeItems;
-  std::array<std::unique_ptr<int>, 4> storeMeleeItems();
+  WeaponItem();
+  const int * getWeaponItem( const int & randomMeleeItem ) const;
+  const int getWeaponDamage() const;
+  std::map<std::string, int> allWeaponItems;
 };
-
-typedef struct RangeItem
-{
-  int bow = 4;
-  int flintlock = 5;
-  int blunderbuss = 10;
-  int musket = 6;
-} Range;
 
 typedef struct PotionItem
 {

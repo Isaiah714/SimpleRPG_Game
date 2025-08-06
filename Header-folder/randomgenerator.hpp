@@ -3,24 +3,26 @@
 
 #include <random>
 #include <iostream>
+#include <vector>
+
+#include "items.hpp"
 
 class Random
 {
   public:
-  inline void randomItem()
-  {
-    // THIS IS TEMPORARY
-    std::random_device rdm;
-    std::mt19937 gen(rdm());
-    std::uniform_int_distribution<> distrib(0, 3);
-
-
-    std::cout << "The random number is: " << distrib(gen) << "\n" << std::endl;
-  }
+  Random();
+  
+  template<typename ItemClass>
+  std::string & randomItemSelector( ItemClass object );
 
   private:
   const std::string item__;
   const int itemStat__;
+  std::vector<std::string> itemName__;
+
+  const int randomNumberGenerator( const int & maxRange );
+  std::string getSelectedItem( const int & selectedItem,
+                               const std::vector<std::string> & itemName );
 };
 
 #endif
