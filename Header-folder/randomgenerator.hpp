@@ -5,24 +5,22 @@
 #include <iostream>
 #include <vector>
 
-#include "items.hpp"
-
 class Random
 {
   public:
   Random();
-  
-  template<typename ItemClass>
-  std::string & randomItemSelector( ItemClass object );
+  Random( std::string item, std::vector<std::string> allItemName );
 
   private:
-  const std::string item__;
-  const int itemStat__;
-  std::vector<std::string> itemName__;
+  std::string item__;
+  std::vector<std::string> allItemName__;
 
   const int randomNumberGenerator( const int & maxRange );
-  std::string getSelectedItem( const int & selectedItem,
-                               const std::vector<std::string> & itemName );
+  std::string getSelectedItem( const int & selectedItem );
+
+  protected:
+  template<typename ItemClass>
+  std::string randomItemSelector( const ItemClass object );
 };
 
 #endif

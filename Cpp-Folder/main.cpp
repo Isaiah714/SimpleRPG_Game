@@ -8,8 +8,10 @@ int main()
   //std::cout << obj;
   
   WeaponItem item;
+  std::pair<std::string, int> inventory = item.getWeaponItem();
 
-  item.getWeaponItem( 3 );
+  std::cout << "The weapon you got is the " << inventory.first << '\n';
+  std::cout << "The " << inventory.first << " does " << inventory.second << " damage!\n";
 
   return 0;
 }

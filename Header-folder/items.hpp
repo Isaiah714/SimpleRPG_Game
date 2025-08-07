@@ -1,18 +1,28 @@
 #ifndef __ITEMS_H__
 #define __ITEMS_H__
 
-#include <array>
-#include <memory>
+#include "randomgenerator.hpp"
+
 #include <map>
 
-#include "randomgenerator.hpp"
+enum WeaponDamage
+{
+  hammer = 2,
+  straightSword = 4,
+  greatSword = 6,
+  mace = 4,
+  bow = 4,
+  flintLock = 5,
+  blunderBuss = 10,
+  musket = 6
+};
 
 
 class WeaponItem : public Random
 {
   public:
   WeaponItem();
-  const int * getWeaponItem( const int & randomMeleeItem ) const;
+  const std::pair<std::string, int> getWeaponItem();
   const int getWeaponDamage() const;
   std::map<std::string, int> allWeaponItems;
 };

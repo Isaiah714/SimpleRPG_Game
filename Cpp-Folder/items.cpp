@@ -1,25 +1,24 @@
-#include <random>
-#include <iostream>
-
 #include "items.hpp"
 
 WeaponItem::WeaponItem()
 {
-  allWeaponItems = { { "Hammer",         2  },
-                     { "Straight Sword", 4  },
-                     { "Great Sword",    6  },
-                     { "Mace",           4  },
-                     { "Bow",            4  },
-                     { "Flintlock",      5  },
-                     { "Blunderbuss",    10 },
-                     { "Musket",         6  } };
+  allWeaponItems = { { "Hammer",         WeaponDamage::hammer         },
+                     { "Straight Sword", WeaponDamage::straightSword  },
+                     { "Great Sword",    WeaponDamage::greatSword     },
+                     { "Mace",           WeaponDamage::mace           },
+                     { "Bow",            WeaponDamage::bow            },
+                     { "Flintlock",      WeaponDamage::flintLock      },
+                     { "Blunderbuss",    WeaponDamage::blunderBuss    },
+                     { "Musket",         WeaponDamage::musket         } };
 }
 
-const int * WeaponItem::getWeaponItem( const int & randomWeaponItem ) const
+const std::pair<std::string, int> WeaponItem::getWeaponItem()
 {
-  //int * chosenWeaponItem = allWeaponItems.at( randomWeaponItem );
-
-  //return chosenWeaponItem;
-
-  return 0;
+  std::string randomWeaponItem = randomItemSelector( *this );
+  auto getDamage = allWeaponItems.find( randomWeaponItem );
+  std::pair<std::string, int> chosenWeaponItem = std::make_pair( randomWeaponItem, getDamage->second );
+  
+  return chosenWeaponItem;
 }
+
+

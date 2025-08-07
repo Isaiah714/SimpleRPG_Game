@@ -1,4 +1,9 @@
-#include <randomgenerator.hpp>
+#include "items.hpp"
+#include "randomgenerator.hpp"
+
+Random::Random() {}
+
+Random::Random( std::string item, std::vector<std::string> allItemName ) : item__{ item }, allItemName__{ allItemName } {}
 
 const int Random::randomNumberGenerator( const int & maxRange )
 {
@@ -9,44 +14,32 @@ const int Random::randomNumberGenerator( const int & maxRange )
   return distrib( gen );
 }
 
-std::string Random::getSelectedItem( const int & selectedItem,
-                                     const std::vector<std::string> & itemName )
+std::string Random::getSelectedItem( const int & selectedItem )
 {
-  const std::string gotSelectedItem = itemName.at( selectedItem );
+  const std::string gotSelectedItem = allItemName__.at( selectedItem );
   return gotSelectedItem;
 }
 
 template<typename ItemClass>
-std::string & Random::randomItemSelector( ItemClass object )
+std::string Random::randomItemSelector( const ItemClass object )
 {
   int maxRange{};
-  switch( ItemClass )
+  if constexpr ( std::is_same<ItemClass, WeaponItem>::value )
   {
-    case WeaponItem:
-    itemName__ = { "Hammer",
-                   "Straight Sword",
-                   "Great Sword",
-                   "Mace", "Bow",
-                   "Flintlock",
-                   "Blunderbuss",
-                   "Musket" };
+    allItemName__ = { "Hammer",
+                      "Straight Sword",
+                      "Great Sword",
+                      "Mace", "Bow",
+                      "Flintlock",
+                      "Blunderbuss",
+                      "Musket" };
     maxRange = 8;
     int itemSelected = randomNumberGenerator( maxRange );
-    item__ = getSelectedItem( itemSelected, itemName__ );
+    item__ = getSelectedItem( itemSelected );
     return item__;
-    break;
-  
-    case PotionItem:
-    break;
-  
-    case ArmorItem:
-    break;
-  
-    case ShieldItem:
-    break;
-  
-    default:
-    std::cerr << "Something went wrong" << std::endl;
-    break;
+  }
+  else
+  {
+    std::cout << "unsupported type\n";
   }
 }
