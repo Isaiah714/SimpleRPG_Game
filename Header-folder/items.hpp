@@ -1,10 +1,32 @@
 #ifndef __ITEMS_H__
 #define __ITEMS_H__
 
-#include "randomgenerator.hpp"
-
 #include <map>
+#include <random>
+#include <iostream>
+#include <vector>
 
+//////////////////////////////RANDOM//////////////////////////////
+class Random
+{
+  public:
+  Random();
+  Random( std::string item, std::vector<std::string> allItemName );
+
+  private:
+  std::string item__;
+  std::vector<std::string> allItemName__;
+
+  const int randomNumberGenerator( const int & maxRange );
+  std::string getSelectedItem( const int & selectedItem );
+
+  protected:
+  template<typename ItemClass>
+  std::string randomItemSelector( const ItemClass object );
+};
+//////////////////////////////////////////////////////////////////
+
+//////////////////////////////WEAPON//////////////////////////////
 enum WeaponDamage
 {
   hammer = 2,
@@ -17,7 +39,6 @@ enum WeaponDamage
   musket = 6
 };
 
-
 class WeaponItem : public Random
 {
   public:
@@ -26,40 +47,60 @@ class WeaponItem : public Random
   const int getWeaponDamage() const;
   std::map<std::string, int> allWeaponItems;
 };
+//////////////////////////////////////////////////////////////////
 
-typedef struct PotionItem
+//////////////////////////////POTION//////////////////////////////
+enum PotionStatus
 {
-  int potion_of_healing = 65;
-  int potion_of_steel = 10;
-  int potion_of_might = 5;
-  int potion_of_agility = 2;
-} Potion;
+  potionOfHealing = 65,
+  potionOfSteel = 10,
+  potionOfMight = 5,
+  potionOfAgility = 2
+};
 
-typedef struct ArmorItem
-{
-  int leather_armor = 3;
-  int chain_armor = 6;
-  int bronze_armor = 9;
-  int steel_armor = 12;
-} Armor;
-
-typedef struct ShieldItem
-{
-  int old_shield = 2;
-  int wood_shield = 4;
-  int bronze_shield = 6;
-  int steel_shield = 8;
-} Shield;
-
-class UseItem
+class PotionItem : public Random
 {
   public:
-  void attackAction();
-  void aidAction();
-  void equipArmor();
-
-  private:
-  int randomItemSelector();
+  PotionItem();
+  const std::pair<std::string, int> getPotionItem();
+  std::map<std::string, int> allPotionItems;
 };
+//////////////////////////////////////////////////////////////////
+
+//////////////////////////////ARMOR///////////////////////////////
+enum ArmorDefense
+{
+  leatherArmor = 3,
+  chainArmor = 6,
+  bronzeArmor = 9,
+  steelArmor = 12
+};
+
+class ArmorItem : public Random
+{
+  public:
+  ArmorItem();
+  const std::pair<std::string, int> getArmorItem();
+  std::map<std::string, int> allArmorItems;
+};
+//////////////////////////////////////////////////////////////////
+
+//////////////////////////////SHIELD//////////////////////////////
+enum ShieldDamageNegation
+{
+  oldShield = 2,
+  woodShield = 4,
+  bronzeShield = 6,
+  steelShield = 8
+};
+
+class ShieldItem : public Random
+{
+  public:
+  ShieldItem();
+  const std::pair<std::string, int> getShieldItem();
+  std::map<std::string, int> allShieldItems;
+};
+//////////////////////////////////////////////////////////////////
 
 #endif
