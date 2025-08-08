@@ -1,9 +1,5 @@
 #include "items.hpp"
 
-Random::Random() {}
-
-Random::Random( std::string item, std::vector<std::string> allItemName ) : item__{ item }, allItemName__{ allItemName } {}
-
 const int Random::randomNumberGenerator( const int & maxRange )
 {
   std::random_device rdm;
@@ -81,20 +77,20 @@ std::string Random::randomItemSelector( const ItemClass object )
 
 WeaponItem::WeaponItem()
 {
-  allWeaponItems = { { "Hammer",         WeaponDamage::hammer         },
-                     { "Straight Sword", WeaponDamage::straightSword  },
-                     { "Great Sword",    WeaponDamage::greatSword     },
-                     { "Mace",           WeaponDamage::mace           },
-                     { "Bow",            WeaponDamage::bow            },
-                     { "Flintlock",      WeaponDamage::flintLock      },
-                     { "Blunderbuss",    WeaponDamage::blunderBuss    },
-                     { "Musket",         WeaponDamage::musket         } };
+  allWeaponItems__ = { { "Hammer",         WeaponDamage::hammer         },
+                       { "Straight Sword", WeaponDamage::straightSword  },
+                       { "Great Sword",    WeaponDamage::greatSword     },
+                       { "Mace",           WeaponDamage::mace           },
+                       { "Bow",            WeaponDamage::bow            },
+                       { "Flintlock",      WeaponDamage::flintLock      },
+                       { "Blunderbuss",    WeaponDamage::blunderBuss    },
+                       { "Musket",         WeaponDamage::musket         } };
 }
 
 const std::pair<std::string, int> WeaponItem::getWeaponItem()
 {
   std::string randomWeaponItem = randomItemSelector( *this );
-  auto getDamage = allWeaponItems.find( randomWeaponItem );
+  auto getDamage = allWeaponItems__.find( randomWeaponItem );
   std::pair<std::string, int> chosenWeaponItem = std::make_pair( randomWeaponItem, getDamage->second );
   
   return chosenWeaponItem;
@@ -102,16 +98,16 @@ const std::pair<std::string, int> WeaponItem::getWeaponItem()
 
 PotionItem::PotionItem()
 {
-  allPotionItems = { { "Potion of Healing", PotionStatus::potionOfHealing },
-                     { "Potion of Steel"  , PotionStatus::potionOfSteel   },
-                     { "Potion of Might"  , PotionStatus::potionOfMight   }, 
-                     { "Potion of Agility", PotionStatus::potionOfAgility } };
+  allPotionItems__ = { { "Potion of Healing", PotionStatus::potionOfHealing },
+                       { "Potion of Steel"  , PotionStatus::potionOfSteel   },
+                       { "Potion of Might"  , PotionStatus::potionOfMight   }, 
+                       { "Potion of Agility", PotionStatus::potionOfAgility } };
 }
 
 const std::pair<std::string, int> PotionItem::getPotionItem()
 {
   std::string randomPotionItem = randomItemSelector( *this );
-  auto getPotionStatus = allPotionItems.find( randomPotionItem );
+  auto getPotionStatus = allPotionItems__.find( randomPotionItem );
   std::pair<std::string, int> chosenPotionItem = std::make_pair( randomPotionItem, getPotionStatus->second );
 
   return chosenPotionItem;
@@ -119,16 +115,16 @@ const std::pair<std::string, int> PotionItem::getPotionItem()
 
 ArmorItem::ArmorItem()
 {
-  allArmorItems = { { "Leather Armor", ArmorDefense::leatherArmor },
-                    { "Chain Armor"  , ArmorDefense::chainArmor   },
-                    { "Bronze Armor" , ArmorDefense::bronzeArmor  },
-                    { "Steel Armor"  , ArmorDefense::steelArmor   } };
+  allArmorItems__ = { { "Leather Armor", ArmorDefense::leatherArmor },
+                      { "Chain Armor"  , ArmorDefense::chainArmor   },
+                      { "Bronze Armor" , ArmorDefense::bronzeArmor  },
+                      { "Steel Armor"  , ArmorDefense::steelArmor   } };
 }
 
 const std::pair<std::string, int> ArmorItem::getArmorItem()
 {
   std::string randomArmorItem = randomItemSelector( *this );
-  auto getArmorDefense = allArmorItems.find( randomArmorItem );
+  auto getArmorDefense = allArmorItems__.find( randomArmorItem );
   std::pair<std::string, int> chosenArmorItem = std::make_pair( randomArmorItem, getArmorDefense->second );
 
   return chosenArmorItem;
@@ -136,16 +132,16 @@ const std::pair<std::string, int> ArmorItem::getArmorItem()
 
 ShieldItem::ShieldItem()
 {
-  allShieldItems = { { "Old Shield",  ShieldDamageNegation::oldShield      }, 
-                     { "Wood Shield", ShieldDamageNegation::woodShield     },
-                     { "Bronze Shield", ShieldDamageNegation::bronzeShield },
-                     { "Steel Shield", ShieldDamageNegation::steelShield   } };
+  allShieldItems__ = { { "Old Shield",  ShieldDamageNegation::oldShield      }, 
+                       { "Wood Shield", ShieldDamageNegation::woodShield     },
+                       { "Bronze Shield", ShieldDamageNegation::bronzeShield },
+                       { "Steel Shield", ShieldDamageNegation::steelShield   } };
 }
 
 const std::pair<std::string, int> ShieldItem::getShieldItem()
 {
   std::string randomShieldItem = randomItemSelector( *this );
-  auto getShieldDamageNegationStat = allShieldItems.find( randomShieldItem );
+  auto getShieldDamageNegationStat = allShieldItems__.find( randomShieldItem );
   std::pair<std::string, int> chosenShieldItem = std::make_pair( randomShieldItem, getShieldDamageNegationStat->second );
 
   return chosenShieldItem;

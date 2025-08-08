@@ -9,10 +9,6 @@
 //////////////////////////////RANDOM//////////////////////////////
 class Random
 {
-  public:
-  Random();
-  Random( std::string item, std::vector<std::string> allItemName );
-
   private:
   std::string item__;
   std::vector<std::string> allItemName__;
@@ -44,8 +40,9 @@ class WeaponItem : public Random
   public:
   WeaponItem();
   const std::pair<std::string, int> getWeaponItem();
-  const int getWeaponDamage() const;
-  std::map<std::string, int> allWeaponItems;
+
+  private:
+  std::map<std::string, int> allWeaponItems__;
 };
 //////////////////////////////////////////////////////////////////
 
@@ -63,7 +60,9 @@ class PotionItem : public Random
   public:
   PotionItem();
   const std::pair<std::string, int> getPotionItem();
-  std::map<std::string, int> allPotionItems;
+
+  private:
+  std::map<std::string, int> allPotionItems__;
 };
 //////////////////////////////////////////////////////////////////
 
@@ -81,7 +80,9 @@ class ArmorItem : public Random
   public:
   ArmorItem();
   const std::pair<std::string, int> getArmorItem();
-  std::map<std::string, int> allArmorItems;
+
+  private:
+  std::map<std::string, int> allArmorItems__;
 };
 //////////////////////////////////////////////////////////////////
 
@@ -99,7 +100,9 @@ class ShieldItem : public Random
   public:
   ShieldItem();
   const std::pair<std::string, int> getShieldItem();
-  std::map<std::string, int> allShieldItems;
+
+  private:
+  std::map<std::string, int> allShieldItems__;
 };
 //////////////////////////////////////////////////////////////////
 
