@@ -15,7 +15,6 @@ class FrameContainer
 {
   public:
   FrameContainer();
- ~FrameContainer() noexcept;
 
   void setFrame( const std::string & collectedFrame );
 
@@ -27,7 +26,6 @@ class Frame
   public:
   Frame();
   Frame( const std::string & filePath );
- ~Frame() noexcept;
 
   friend std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer);
 

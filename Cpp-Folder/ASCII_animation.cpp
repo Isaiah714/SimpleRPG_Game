@@ -2,16 +2,12 @@
 
 FrameContainer::FrameContainer() {}
 
-FrameContainer::~FrameContainer() noexcept {}
-
 void FrameContainer::setFrame( const std::string & collectedFrame )
 {
   frame = collectedFrame;
 }
 
 Frame::Frame( const std::string & filePath ) : filePath__{ filePath }{}
-
-Frame::~Frame() noexcept {};
 
 void Frame::readFile()
 {
