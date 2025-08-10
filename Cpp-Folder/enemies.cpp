@@ -3,55 +3,59 @@
 Enemy::Enemy() {}
 
 template<typename T> 
-std::vector<T> Enemy::collectStageEnemies( const T & stage )
+std::vector<T> Enemy::collectStageEnemies( const std::string & stage )
 {
   std::vector<T> allStageEnemies = {};
-  if constexpr ( std::is_same<EnemyClass, GreenSlime>::value )
+  if ( stage == "Stage 1" )
   {
-    GreenSlime gSlime;
-    allStageEnemies.push_back( gSlime );
+    std::vector<std::string> allNames = { "Green Slime", "Tall Slime", "Pile of Dirt", "Butter Cup" };
+    for( int i = 0; i < allNames.size(); ++i )
+    {
+      if( allNames.at( i ) == "Green Slime" )
+      {
+        Plains greenSlime{ allNames.at( i ), PlainEnemyAttributes::slimeHealth, PlainEnemyAttributes::slimeAttack };
+        allStageEnemies.push_back( greenSlime );
+      }
+      if( allNames.at( i ) == "Tall Slime" )
+      {
+        Plains tallSlime{ allNames.at( i ), PlainEnemyAttributes::tallSlimeHealth, PlainEnemyAttributes::tallSlimeAttack };
+        allStageEnemies.push_back( tallSlime );
+      }
+      if( allNames.at( i ) == "Pile of Dirt" )
+      {
+        Plains pileOfDirt{ allNames.at( i ), PlainEnemyAttributes::pileOfDirtHealth, PlainEnemyAttributes::pileOfDirtAttack };
+      }
+      if( allNames.at( i ) == "Butter Cup" )
+      {
+        Plains butterCup{ allNames.at( i ), PlainEnemyAttributes::butterCupHealth, PlainEnemyAttributes::butterCupAttack };
+      }
+    }
+    return allStageEnemies;
   }
-  if constexpr ( std::is_same<EnemyClass, TallSlime>::value )
+  if ( stage == "Stage 2" )
   {
-    TallSlime tSlime;
-    allStageEnemies.push_back( tSlime );
+    std::vector<std::string> allNames = { "Purple Zombie", "Shiny Skeleton", "WonderingTree", "LostGnome" };
+    for( int i = 0; i < allNames.size(); ++i )
+    {
+      if( allNames.at( i ) == "Purple Zombie" )
+      {
+        Forest zombie{ allNames.at( i ), ForestEnemyAttributes::purpleZombieHealth, ForestEnemyAttributes::purpleZombieAttack };
+      }
+    }
   }
-  if constexpr( std::is_same<EnemyClass, PileOfDirt>::value )
+  else
   {
-    PileOfDirt dirt;
-    allStageEnemies.push_back( dirt );
-  }
-  if constexpr( std::is_same<EnemyClass, ButterCup>::value )
-  {
-    ButterCup butterCupFlower;
-    allStageEnemies.push_back( butterCupFlower );
-  }
-  if constexpr( std::is_same<EnemyClass, PurpleZombie>::value )
-  {
-    PurpleZombie zombie;
-    allStageEnemies.push_back( zombie );
-  }
-  if constexpr( std::is_same<EnemyClass, ShinySkeleton>::value )
-  {
-    ShinySkeleton skeleton;
-    allStageEnemies.push_back( skeleton );
-  }
-  if constexpr ( std::is_same<EnemyClass, WonderingTree>::value )
-  {
-    WonderingTree tree;
-    allStageEnemies.push_back( tree );
-  }
-  if constexpr ( std::is_same<EnemyClass, LostGnome>::value )
-  {
-    LostGnome gnome;
-    allStageEnemies.push_back( gnome );
+    allStageEnemies.clear();
+    std::cout << "Ran out of stages...\n";
+    return allStageEnemies;
   }
 }
 
 template<typename T>
-T Enemy::getEnemy( T stage )
+T Enemy::getEnemy( const std::string & stage )
 {
-  std::vector<T> stageEnemies = collectStageEnemies( stage );
+  std::vector<T> stageEnemies = {};
+  if( stageEnemies.empty() ) { stageEnemies = collectStageEnemies( stage ); }
   int maxRange = stageEnemies.size() - 1;
   int enemyIndex = randomNumberGenerator( maxRange );
   auto selectedEnemy = stageEnemies.at( enemyIndex );
@@ -59,23 +63,58 @@ T Enemy::getEnemy( T stage )
   return selectedEnemy;
 }
 
-// These enemy methods are temporary
-GreenSlime::GreenSlime()
+Plains::Plains( const std::string enemyName, int health, int attack ) : enemyName__{ enemyName }, health__{ health }, attack__{ attack }{}
+
+const std::string Plains::getName() const
 {
-  health__ = 10;
-  attack__ = 2;
+  return enemyName__;
 }
 
-int GreenSlime::criticalAttack()
+int Plains::getHealth()
 {
-  int critAttack = 2 + attack__;
-
-  return critAttack;
+  return health__;
 }
 
-int specialAttack()
+int Plains::getAttack()
 {
-  int specAttack = 3;
-  
-  return specAttack;
+  return attack__;
+}
+
+int Plains::getcriticalAttack()
+{
+  return attack__ + 5;
+}
+
+// This function will only affect the players items
+int Plains::getSpecialAttack()
+{
+  return attack__ + 2;
+}
+
+Forest::Forest( const std::string enemyName, int health, int attack ) : enemyName__{ enemyName }, health__{ health }, attack__{ attack } {}
+
+const std::string Forest::getName() const
+{
+  return enemyName__;
+}
+
+int Forest::getHealth()
+{
+  return health__;
+}
+
+int Forest::getAttack()
+{
+  return attack__;
+}
+
+int Forest::getCriticalAttack()
+{
+  return attack__ + 7;
+}
+
+// This function will only affect the players items
+int Forest::getSpecialAttack()
+{
+  return attack__ + 4;
 }

@@ -15,12 +15,72 @@ class Enemy : Random
   public:
   Enemy();
   template<typename T>
-  T getEnemy( T stage );
+  T getEnemy( const std::string & stage );
 
-  protected:
+  private:
   template<typename T>
-  std::vector<T> collectStageEnemies( const T & stage );
+  std::vector<T> collectStageEnemies( const std::string & stage );
 
+};
+
+enum PlainEnemyAttributes
+{
+  slimeHealth = 10,
+  slimeAttack = 2,
+  tallSlimeHealth = 15,
+  tallSlimeAttack = 6,
+  pileOfDirtHealth = 20,
+  pileOfDirtAttack = 9,
+  butterCupHealth = 25,
+  butterCupAttack = 12
+};
+
+class Plains : public Enemy
+{
+  public:
+  Plains( const std::string enemyName, int health, int attack );
+  const std::string getName() const;
+  int getHealth();
+  int getAttack();
+  int getcriticalAttack();
+  int getSpecialAttack();
+
+  private:
+  const std::string enemyName__;
+  int health__;
+  int attack__;
+
+  std::vector<Plains> allPlainEnemies__;
+};
+
+enum ForestEnemyAttributes
+{
+  purpleZombieHealth = 35,
+  purpleZombieAttack = 16,
+  shinySkeletonHealth = 45,
+  shinySkeletonAttack = 23,
+  wonderingTreeHealth = 60,
+  wonderingTreeAttack = 32,
+  lostGnomeHealth = 25,
+  lostGnomeAttack = 35
+};
+
+class Forest : public Enemy
+{
+  public:
+  Forest( const std::string enemyName, int health, int attack );
+  const std::string getName() const;
+  int getHealth();
+  int getAttack();
+  int getCriticalAttack();
+  int getSpecialAttack();
+
+  private:
+  const std::string enemyName__;
+  int health__;
+  int attack__;
+
+  std::vector<Forest> allForestEnemies__;
 };
 
 class GreenSlime : public Enemy

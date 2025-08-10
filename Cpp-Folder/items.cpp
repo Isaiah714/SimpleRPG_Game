@@ -23,7 +23,8 @@ std::string Random::randomItemSelector( const ItemClass object )
     allItemName__ = { "Hammer",
                       "Straight Sword",
                       "Great Sword",
-                      "Mace", "Bow",
+                      "Mace",
+                      "Bow",
                       "Flintlock",
                       "Blunderbuss",
                       "Musket" };

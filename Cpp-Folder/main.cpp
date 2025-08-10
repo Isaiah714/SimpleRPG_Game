@@ -23,7 +23,11 @@ int main()
   std::pair<std::string, int> arm = shield.getShieldItem();
   std::cout << "You got the " << arm.first << "\nThe damage negation stat is " << arm.second << "!\n\n";
 
-  
+  Enemy enemy;
+
+  const std::string stageNum = "Stage One";
+
+  enemy.getEnemy<GreenSlime>( stageNum );
 
   return 0;
 }
