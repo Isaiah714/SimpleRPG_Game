@@ -2,8 +2,8 @@
 
 Enemy::Enemy() {}
 
-template<typename EnemyClass> 
-std::vector<EnemyClass> Enemy::collectStageEnemies()
+template<typename T> 
+std::vector<T> Enemy::collectStageEnemies( const T & stage )
 {
   std::vector<T> allStageEnemies = {};
   if constexpr ( std::is_same<EnemyClass, GreenSlime>::value )
@@ -39,7 +39,7 @@ std::vector<EnemyClass> Enemy::collectStageEnemies()
   if constexpr ( std::is_same<EnemyClass, WonderingTree>::value )
   {
     WonderingTree tree;
-    allStageEnemies.push_bakc( tree );
+    allStageEnemies.push_back( tree );
   }
   if constexpr ( std::is_same<EnemyClass, LostGnome>::value )
   {
@@ -49,9 +49,9 @@ std::vector<EnemyClass> Enemy::collectStageEnemies()
 }
 
 template<typename T>
-T Enemy::getEnemy()
+T Enemy::getEnemy( T stage )
 {
-  std::vector<T> stageEnemies = collectStageEnemies();
+  std::vector<T> stageEnemies = collectStageEnemies( stage );
   int maxRange = stageEnemies.size() - 1;
   int enemyIndex = randomNumberGenerator( maxRange );
   auto selectedEnemy = stageEnemies.at( enemyIndex );

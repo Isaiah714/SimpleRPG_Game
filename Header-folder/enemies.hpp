@@ -15,11 +15,11 @@ class Enemy : Random
   public:
   Enemy();
   template<typename T>
-  T getEnemy();
+  T getEnemy( T stage );
 
   protected:
   template<typename T>
-  std::vector<T> collectStageEnemies();
+  std::vector<T> collectStageEnemies( const T & stage );
 
 };
 

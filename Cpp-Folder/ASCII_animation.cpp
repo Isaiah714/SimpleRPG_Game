@@ -7,7 +7,7 @@ void FrameContainer::setFrame( const std::string & collectedFrame )
   frame = collectedFrame;
 }
 
-Frame::Frame( const std::string & filePath ) : filePath__{ filePath }{}
+Frame::Frame( const std::string & filePath ) : filePath__{ filePath } {}
 
 void Frame::readFile()
 {
