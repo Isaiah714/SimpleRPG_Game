@@ -13,12 +13,13 @@ class Random
   std::string item__;
   std::vector<std::string> allItemName__;
 
-  const int randomNumberGenerator( const int & maxRange );
   std::string getSelectedItem( const int & selectedItem );
 
   protected:
   template<typename ItemClass>
   std::string randomItemSelector( const ItemClass object );
+
+  const int randomNumberGenerator( const int & maxRange );
 };
 //////////////////////////////////////////////////////////////////
 
