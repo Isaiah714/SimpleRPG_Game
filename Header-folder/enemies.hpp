@@ -16,6 +16,7 @@ class Enemy : Random
   Enemy();
   
   private:
+  int enemyIndex__;
   template<typename T>
   std::vector<T> collectStageEnemies( const std::string & stage );
 
@@ -43,7 +44,7 @@ class Plains : public Enemy
   public:
   Plains();
   Plains( const std::string enemyName, int health, int attack );
-  const std::string getName() const;
+  std::string getName();
   int getHealth();
   int getAttack();
   int getcriticalAttack();
@@ -52,7 +53,7 @@ class Plains : public Enemy
   Plains getPlainsEnemy( const std::string & stage );
 
   private:
-  const std::string enemyName__;
+  std::string enemyName__;
   int health__;
   int attack__;
 

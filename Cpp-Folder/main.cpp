@@ -25,7 +25,8 @@ int main()
 
   Plains plainsEnemy;
 
-  plainsEnemy.getPlainsEnemy("Stage 1");
+  std::cout << "You have ecountered a " << plainsEnemy.getPlainsEnemy("Stage 1").getHealth() << "!\n\n";
+  std::cout << "You have ecountered a " << plainsEnemy.getPlainsEnemy("Stage 1").getName() << "!\n\n";
 
   return 0;
 }
