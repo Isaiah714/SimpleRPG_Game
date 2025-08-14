@@ -78,32 +78,53 @@ std::vector<T> Enemy::collectStageEnemies( const std::string & stage )
 }
 
 template<typename T>
-T Enemy::getEnemy( const std::string & stage )
+void Enemy::getEnemy( const std::string & stage )
 {
   std::vector<T> stageEnemies = {};
   if( stageEnemies.empty() ) { stageEnemies = collectStageEnemies<T>( stage ); }
   int maxRange = stageEnemies.size() - 1;
-  if( enemyIndex__ = 0 ) { enemyIndex__ = randomNumberGenerator( maxRange ); }
-  auto selectedEnemy = stageEnemies.at( enemyIndex__ );
+  int enemyIndex = randomNumberGenerator( maxRange );
+  auto selectedEnemy = stageEnemies.at( enemyIndex );
 
-  return selectedEnemy;
+  enemyName__ = selectedEnemy.getName();
+  enemyHealth__ = selectedEnemy.getHealth();
+  enemyAttack__ = selectedEnemy.getAttack();
+  enemyCritAttack__ = selectedEnemy.getCriticalAttack();
+  enemySpecAttack__ = selectedEnemy.getSpecialAttack();
 }
 
-Plains::Plains() {}
-
-Plains::Plains( const std::string enemyName, int health, int attack ) : enemyName__{ enemyName }, health__{ health }, attack__{ attack }{}
-
-std::string Plains::getName()
+const std::string Enemy::getName()
 {
   return enemyName__;
 }
 
-Plains Plains::getPlainsEnemy( const std::string & stage )
+const int Enemy::getHealth()
 {
-  //this->attack__ = getEnemy<Plains>( stage ).getAttack();
-  //this->health__ = getEnemy<Plains>( stage ).getHealth();
-  //this->enemyName__ = getEnemy<Plains>( stage ).getName();
-  return getEnemy<Plains>( stage );
+  return enemyHealth__;
+}
+
+const int Enemy::getAttack()
+{
+  return enemyAttack__;
+}
+
+const int Enemy::getCriticalAttack()
+{
+  return enemyCritAttack__;
+}
+
+const int Enemy::getSpecialAttack()
+{
+  return enemySpecAttack__;
+}
+
+Plains::Plains() {}
+
+Plains::Plains( const std::string enemyName, int health, int attack ) : name__{ enemyName }, health__{ health }, attack__{ attack }{}
+
+std::string Plains::getName()
+{
+  return name__;
 }
 
 int Plains::getHealth()
@@ -116,7 +137,7 @@ int Plains::getAttack()
   return attack__;
 }
 
-int Plains::getcriticalAttack()
+int Plains::getCriticalAttack()
 {
   return attack__ + 5;
 }

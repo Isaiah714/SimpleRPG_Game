@@ -14,17 +14,26 @@ class Enemy : Random
 {
   public:
   Enemy();
+
+  template<typename T>
+  void getEnemy( const std::string & stage );
+  
+  const std::string getName();
+  const int getHealth();
+  const int getAttack();
+  const int getCriticalAttack();
+  const int getSpecialAttack();
   
   private:
-  int enemyIndex__;
+  std::string enemyName__;
+  int enemyHealth__;
+  int enemyAttack__; 
+  int enemyCritAttack__;
+  int enemySpecAttack__;
+
+
   template<typename T>
   std::vector<T> collectStageEnemies( const std::string & stage );
-
-  protected:
-  template<typename T>
-  T getEnemy( const std::string & stage );
-
-
 };
 
 enum PlainEnemyAttributes
@@ -47,13 +56,13 @@ class Plains : public Enemy
   std::string getName();
   int getHealth();
   int getAttack();
-  int getcriticalAttack();
+  int getCriticalAttack();
   int getSpecialAttack();
 
   Plains getPlainsEnemy( const std::string & stage );
 
   private:
-  std::string enemyName__;
+  std::string name__;
   int health__;
   int attack__;
 

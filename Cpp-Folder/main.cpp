@@ -23,10 +23,11 @@ int main()
   std::pair<std::string, int> arm = shield.getShieldItem();
   std::cout << "You got the " << arm.first << "\nThe damage negation stat is " << arm.second << "!\n\n";
 
-  Plains plainsEnemy;
-
-  std::cout << "You have ecountered a " << plainsEnemy.getPlainsEnemy("Stage 1").getHealth() << "!\n\n";
-  std::cout << "You have ecountered a " << plainsEnemy.getPlainsEnemy("Stage 1").getName() << "!\n\n";
-
+  Enemy e;
+  const std::string stage = "Stage 1";
+  e.getEnemy<Plains>( stage );
+  std::cout << "Name: " << e.getName() << '\n' << "Health " << e.getHealth() << '\n' << "Attack " << e.getAttack() << '\n';
+  std::cout << "Critical Attack: " << e.getCriticalAttack() << "Special Attack: " << e.getSpecialAttack() << "\n\n";
+ 
   return 0;
 }
