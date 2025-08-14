@@ -68,6 +68,68 @@ std::vector<T> Enemy::collectStageEnemies( const std::string & stage )
       return allEnemies;      
     }
   }
+  if constexpr ( std::is_same<T, Cave>::value )
+  {
+    if( stage == "Stage 3" )
+    {
+      std::vector<std::string> allNames = { "Giant Spider", "Flesh Rock", "Isolated Wizard", "Giant Blood Worm" };
+      for( int i = 0; i < allNames.size(); ++i)
+      {
+        if( allNames.at( i ) == "Giant Spider" )
+        {
+          Cave spider{ allNames.at( i ), CaveEnemyAttributes::giantSpiderHealth, CaveEnemyAttributes::giantSpiderAttack };
+          allEnemies.push_back( spider );
+        }
+        if( allNames.at( i ) == "Flesh Rock" )
+        {
+          Cave rock{ allNames.at( i ), CaveEnemyAttributes::fleshRockHealth, CaveEnemyAttributes::fleshRockAttack };
+          allEnemies.push_back( rock );
+        }
+        if( allNames.at( i ) == "Isolated Wizard" )
+        {
+          Cave wizard{ allNames.at( i ), CaveEnemyAttributes::isolatedWizardHealth, CaveEnemyAttributes::isolatedWizardAttack };
+          allEnemies.push_back( wizard );
+        }
+        if( allNames.at( i ) == "Giant Blood Worm" )
+        {
+          Cave worm{ allNames.at( i ), CaveEnemyAttributes::giantBloodWormHealth, CaveEnemyAttributes::giantBloodWormAttack };
+          allEnemies.push_back( worm );
+        }
+      }
+      return allEnemies;
+    }
+  }
+  if constexpr ( std::is_same<T, Shore>::value )
+  {
+    if( stage == "Stage 4" )
+    {
+      std::vector<std::string> allNames = { "Grafted Soldier", "Dark Witch", "Steel Knight", "Prime Griffis" };
+      for( int i = 0; i < allNames.size(); ++i )
+      {
+        if( allNames.at( i ) == "Grafted Soldier" )
+        {
+          Shore soldier{ allNames.at( i ), ShoreEnemyAttributes::graftedSoldierHealth, ShoreEnemyAttributes::graftedSoldierAttack };
+          allEnemies.push_back( soldier );
+        }
+        if( allNames.at( i ) == "Dark Witch" )
+        {
+          Shore witch{ allNames.at( i ), ShoreEnemyAttributes::darkWitchHealth, ShoreEnemyAttributes::darkWitchAttack };
+          allEnemies.push_back( witch );
+        }
+        if( allNames.at( i ) == "Steel Knight" )
+        {
+          Shore knight{ allNames.at( i ), ShoreEnemyAttributes::steelKnightHealth, ShoreEnemyAttributes::steelKnightAttack };
+          allEnemies.push_back( knight );
+        }
+        if( allNames.at( i ) == "Prime Griffis" )
+        {
+          Shore griffis{ allNames.at( i ), ShoreEnemyAttributes::primeGriffisHealth, ShoreEnemyAttributes::primeGriffisAttack };
+          allEnemies.push_back( griffis );
+        }
+      }
+      return allEnemies;
+    }
+  }
   else
   {
     std::vector<T> emptyEnemyContainer;
@@ -146,10 +208,26 @@ const int Cave::getAttack() { return attack__; }
 
 const int Cave::getCriticalAttack() { return attack__ + 11; }
 
+// This function will only affect the players items
 const int Cave::getSpecialAttack() { return attack__ + 7; }
 
+Shore::Shore() {}
 
-// The code below tells the compiler which version of methods to use at compile time
+Shore::Shore( const std::string enemyName, int health, int attack) : enemyName__{ enemyName }, health__{ health }, attack__{ attack } {}
+
+const std::string Shore::getName() const { return enemyName__; }
+
+const int Shore::getHealth() { return health__; }
+
+const int Shore::getAttack() { return attack__; }
+
+const int Shore::getCriticalAttack() { return attack__ + 20; }
+
+// This function will only affect the players items
+const int Shore::getSpecialAttack() { return attack__ + 12; }
+
+
+// The code below tells the compiler which version template to use at compile time
 template void Enemy::getEnemy<Plains>( const std::string & stage );
 template std::vector<Plains> Enemy::collectStageEnemies<Plains>( const std::string & stage );
 
@@ -158,3 +236,6 @@ template std::vector<Forest> Enemy::collectStageEnemies<Forest>( const std::stri
 
 template void Enemy::getEnemy<Cave>( const std::string & stage );
 template std::vector<Cave> Enemy::collectStageEnemies<Cave>( const std::string & stage );
+
+template void Enemy::getEnemy<Shore>( const std::string & stage );
+template std::vector<Shore> Enemy::collectStageEnemies( const std::string & stage );

@@ -129,8 +129,8 @@ enum ShoreEnemyAttributes
   darkWitchAttack = 225,
   steelKnightHealth = 600,
   steelKnightAttack = 350,
-  primeGriffimHealth = 800,
-  primeGriffimAttack = 500
+  primeGriffisHealth = 800,
+  primeGriffisAttack = 500
 };
 
 class Shore : public Enemy

@@ -4,6 +4,7 @@
 
 int main()
 {
+  //////////////////////////////////////////////////////////TEST PROGRAM//////////////////////////////////////////////////////////
   //Frame obj("../ASCII-Frames/Plains/Slime_Encounter.txt");
   //std::cout << obj;
   
@@ -35,6 +36,17 @@ int main()
   std::cout << "Name: " << f.getName() << '\n' << "Health: " << f.getHealth() << '\n' << "Attack: " << f.getAttack() << '\n';
   std::cout << "Critical Attack: " << f.getCriticalAttack() << "\nSpecial Attack: " << f.getSpecialAttack() << "\n\n";
 
+  Enemy c;
+  const std::string stagec = "Stage 3";
+  c.getEnemy<Cave>( stagec );
+  std::cout << "Name: " << c.getName() << '\n' << "Health: " << c.getHealth() << '\n' << "Attack: " << c.getAttack() << '\n';
+  std::cout << "Critical Attack: " << c.getCriticalAttack() << "\nSpecial Attack: " << c.getSpecialAttack() << "\n\n";
+
+  Enemy s;
+  const std::string stages = "Stage 4";
+  s.getEnemy<Shore>( stages );
+  std::cout << "Name: " << s.getName() << '\n' << "Health: " << s.getHealth() << '\n' << "Attack: " << s.getAttack() << '\n';
+  std::cout << "Critical Attack: " << s.getCriticalAttack() << "\nSpecial Attack: " << s.getSpecialAttack() << "\n\n";
 
   
  
