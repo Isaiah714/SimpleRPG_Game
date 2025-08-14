@@ -6,10 +6,6 @@
 
 #include "items.hpp"
 
-// IDEA - Have one class that takes care of enemy actions
-// Then create structs to set enemy attributes and use those 
-// attributes into classes that correspond to each enemy
-
 class Enemy : Random
 {
   public:
@@ -65,8 +61,6 @@ class Plains : public Enemy
   const std::string name__;
   int health__;
   int attack__;
-
-  //std::vector<Plains> allPlainEnemies__;
 };
 
 enum ForestEnemyAttributes
