@@ -54,19 +54,19 @@ class Plains : public Enemy
   Plains();
   Plains( const std::string enemyName, int health, int attack );
   std::string getName();
-  int getHealth();
-  int getAttack();
-  int getCriticalAttack();
-  int getSpecialAttack();
+  const int getHealth();
+  const int getAttack();
+  const int getCriticalAttack();
+  const int getSpecialAttack();
 
   Plains getPlainsEnemy( const std::string & stage );
 
   private:
-  std::string name__;
+  const std::string name__;
   int health__;
   int attack__;
 
-  std::vector<Plains> allPlainEnemies__;
+  //std::vector<Plains> allPlainEnemies__;
 };
 
 enum ForestEnemyAttributes
@@ -84,115 +84,76 @@ enum ForestEnemyAttributes
 class Forest : public Enemy
 {
   public:
+  Forest();
   Forest( const std::string enemyName, int health, int attack );
   const std::string getName() const;
-  int getHealth();
-  int getAttack();
-  int getCriticalAttack();
-  int getSpecialAttack();
+  const int getHealth();
+  const int getAttack();
+  const int getCriticalAttack();
+  const int getSpecialAttack();
 
   private:
   const std::string enemyName__;
   int health__;
   int attack__;
-
-  std::vector<Forest> allForestEnemies__;
 };
 
-class GreenSlime : public Enemy
+enum CaveEnemyAttributes
+{
+  giantSpiderHealth = 100,
+  giantSpiderAttack = 50,
+  fleshRockHealth = 150,
+  fleshRockAttack = 75,
+  isolatedWizardHealth = 180,
+  isolatedWizardAttack = 95,
+  giantBloodWormHealth = 250,
+  giantBloodWormAttack = 120
+};
+
+class Cave : public Enemy
 {
   public:
-  GreenSlime();
-  int criticalAttack();
-  int specialAttack();
+  Cave();
+  Cave( const std::string enemyName, int health, int attack );
+  const std::string getName() const;
+  const int getHealth();
+  const int getAttack();
+  const int getCriticalAttack();
+  const int getSpecialAttack();
 
   private:
+  const std::string enemyName__;
   int health__;
   int attack__;
 };
 
-class TallSlime : public Enemy
+enum ShoreEnemyAttributes
 {
-  public:
-  TallSlime();
-  int criticalAttack();
-  int specialAttack();
-
-  private:
-  int health__;
-  int attack__;
+  graftedSoldierHealth = 300,
+  graftedSoldierAttack = 180,
+  darkWitchHealth = 400,
+  darkWitchAttack = 225,
+  steelKnightHealth = 600,
+  steelKnightAttack = 350,
+  primeGriffimHealth = 800,
+  primeGriffimAttack = 500
 };
 
-class PileOfDirt : public Enemy
+class Shore : public Enemy
 {
   public:
-  PileOfDirt();
-  int criticalAttack();
-  int specialAttack();
+  Shore();
+  Shore( const std::string enemyName, int health, int attack );
+  const std::string getName() const;
+  const int getHealth();
+  const int getAttack();
+  const int getCriticalAttack();
+  const int getSpecialAttack();
 
   private:
+  const std::string enemyName__;
   int health__;
   int attack__;
-};
-
-class ButterCup : public Enemy
-{
-  public:
-  ButterCup();
-  int criticalAttack();
-  int specialAttack();
-
-  private:
-  int health__;
-  int attack__;
-};
-
-class PurpleZombie : public Enemy
-{
-  public:
-  PurpleZombie();
-  int criticalAttack();
-  int specialAttack();
-
-  private:
-  int health__;
-  int attack__;
-};
-
-class ShinySkeleton : public Enemy
-{
-  public:
-  ShinySkeleton();
-  int criticalAttack();
-  int specialAttack();
-
-  private:
-  int health__;
-  int attack__;
-};
-
-class WonderingTree : public Enemy
-{
-  public:
-  WonderingTree();
-  int criticalAttack();
-  int specialAttack();
-
-  private:
-  int health__;
-  int attack__;
-};
-
-class LostGnome : public Enemy
-{
-  public:
-  LostGnome();
-  int criticalAttack();
-  int specialAttack();
-
-  private:
-  int health__;
-  int attack__;  
 };
 
 #endif
