@@ -6,9 +6,9 @@
 
 #include "items.hpp"
 
-class Enemy : Random
+class Enemy : public Random
 {
-  public:
+  protected:
   Enemy();
 
   template<typename T>

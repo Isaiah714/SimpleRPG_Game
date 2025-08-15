@@ -132,10 +132,14 @@ std::vector<T> Enemy::collectStageEnemies( const std::string & stage )
   }
   else
   {
-    std::vector<T> emptyEnemyContainer;
-    std::cout << "Ran out of stages...\n";
-    return emptyEnemyContainer;
+    allEnemies.clear();
+    std::cout << "ERROR - Class type must correspond to the appropiate stage number!\n";
+    std::cout << "Example - If the class type is Plains, currentStage__ MUST equal to 'Stage 1.'\n";
+    return allEnemies;
   }
+  // I put this duplicate code here since using class type 'Shore' incorreclty skips the else block.
+  std::cout << "ERROR - Class type must correspond to the appropiate stage number!\n";
+  std::cout << "Example - If the class type is Plains, currentStage__ MUST equal to 'Stage 1.'\n";
   return allEnemies; 
 }
 
