@@ -27,9 +27,6 @@ void GamePanel::givePlayerSetOfItems()
 
   WeaponItem wep;
   // Need to see the key to access the items status so it can be used in the combatPlayer function...
-  auto showWep = std::make_pair( wep.getWeaponItem().first, wep.getWeaponItem().second );
-  playersInventory__.insert( wep.getWeaponItem() );
-
   PotionItem pot;
   playersInventory__.insert( pot.getPotionItem() );
 
@@ -67,5 +64,5 @@ void GamePanel::spawnEnemy( const std::string & stage )
 
 void GamePanel::playercombat()
 {
-  
+  std::cout << playersInventory__["Hammer"];
 }

@@ -40,10 +40,14 @@ class WeaponItem : public Random
 {
   public:
   WeaponItem();
-  const std::pair<std::string, int> getWeaponItem();
+  void getWeaponItem();
+  const std::string getWeaponName();
+  const int getWeaponDamage();
 
   private:
   std::map<std::string, int> allWeaponItems__;
+  std::string weaponName__;
+  int weaponDamage__;
 };
 //////////////////////////////////////////////////////////////////
 

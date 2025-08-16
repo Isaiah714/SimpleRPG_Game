@@ -88,13 +88,24 @@ WeaponItem::WeaponItem()
                        { "Musket",         WeaponDamage::musket         } };
 }
 
-const std::pair<std::string, int> WeaponItem::getWeaponItem()
+void WeaponItem::getWeaponItem()
 {
   std::string randomWeaponItem = randomItemSelector( *this );
   auto getDamage = allWeaponItems__.find( randomWeaponItem );
-  std::pair<std::string, int> chosenWeaponItem = std::make_pair( randomWeaponItem, getDamage->second );
+  weaponName__ = randomWeaponItem;
+  weaponDamage__ = getDamage->second;
   
-  return chosenWeaponItem;
+  return;
+}
+
+const std::string WeaponItem::getWeaponName()
+{
+  return weaponName__;
+}
+
+const int WeaponItem::getWeaponDamage()
+{
+  return weaponDamage__;
 }
 
 PotionItem::PotionItem()

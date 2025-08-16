@@ -10,6 +10,10 @@ class GamePanel : public Enemy
 
   private:
   std::map<std::string, int> playersInventory__;
+  std::pair<std::string, int> weapon__;
+  std::pair<std::string, int> potion___;
+  std::pair<std::string, int> armor__;
+  std::pair<std::string, int> shield__;
   std::string currentStage__;
 
   void animation( const std::string & filepath );
