@@ -68,6 +68,8 @@ class PotionItem : public Random
 
   private:
   std::map<std::string, int> allPotionItems__;
+  std::string potionName__;
+  int potionStat__;
 };
 //////////////////////////////////////////////////////////////////
 
@@ -88,6 +90,8 @@ class ArmorItem : public Random
 
   private:
   std::map<std::string, int> allArmorItems__;
+  std::string armorName__;
+  int armorDefense__;
 };
 //////////////////////////////////////////////////////////////////
 
@@ -108,6 +112,8 @@ class ShieldItem : public Random
 
   private:
   std::map<std::string, int> allShieldItems__;
+  std::string shieldName__;
+  int shieldNegation__;
 };
 //////////////////////////////////////////////////////////////////
 
