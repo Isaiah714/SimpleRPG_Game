@@ -64,7 +64,9 @@ class PotionItem : public Random
 {
   public:
   PotionItem();
-  const std::pair<std::string, int> getPotionItem();
+  void getPotionItem();
+  const std::string getPotionName();
+  const int getPotionStat();
 
   private:
   std::map<std::string, int> allPotionItems__;
@@ -86,7 +88,9 @@ class ArmorItem : public Random
 {
   public:
   ArmorItem();
-  const std::pair<std::string, int> getArmorItem();
+  void getArmorItem();
+  const std::string getArmorName();
+  const int getArmorDefense();
 
   private:
   std::map<std::string, int> allArmorItems__;
@@ -108,7 +112,9 @@ class ShieldItem : public Random
 {
   public:
   ShieldItem();
-  const std::pair<std::string, int> getShieldItem();
+  void getShieldItem();
+  const std::string getShieldName();
+  const int getShieldNegation();
 
   private:
   std::map<std::string, int> allShieldItems__;

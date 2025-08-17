@@ -19,7 +19,7 @@ void Frame::readFile()
   int linesRead{};
   FrameContainer collectFrame;
 
-  frameFile.exceptions( std::ifstream::failbit | std::ifstream::badbit );
+  frameFile.exceptions( std::ifstream::badbit );
   try
   {
     if( !frameFile.is_open() )
@@ -51,17 +51,31 @@ void Frame::readFile()
   }
 }
 
+const std::string Frame::printGameDialog() const
+{
+  std::string dialog = "You have encountered a ";
+  return dialog;
+}
+
 std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer )
 {
   frameBuffer.readFile();
-  int incrementFrame{};
-  while( true )
+  if( frameBuffer.allFrames__.size() == 1 )
   {
-    std::cout << "\x1B[2J\x1B[H";
-    stream << frameBuffer.allFrames__.at( incrementFrame ).frame;
-    std::this_thread::sleep_for( std::chrono::milliseconds( 200 ) );
-    ++incrementFrame;
-    if( incrementFrame == frameBuffer.allFrames__.size() ) { incrementFrame = 0; }
+    stream << frameBuffer.allFrames__.at( 0 ).frame;
+  }
+  else if( frameBuffer.allFrames__.size() > 1 )
+  {
+    int incrementFrame{};
+    while( true )
+    {
+      std::cout << "\x1B[2J\x1B[H";
+      stream << "\n\n\n\n\n\n\n\n" << frameBuffer.printGameDialog() << '\n'
+             << frameBuffer.allFrames__.at( incrementFrame ).frame;
+      std::this_thread::sleep_for( std::chrono::milliseconds( 200 ) );
+      ++incrementFrame;
+      if( incrementFrame == frameBuffer.allFrames__.size() ) { incrementFrame = 0; }
+    }
   }
   return stream;
 }

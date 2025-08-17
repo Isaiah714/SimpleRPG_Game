@@ -94,8 +94,6 @@ void WeaponItem::getWeaponItem()
   auto getDamage = allWeaponItems__.find( randomWeaponItem );
   weaponName__ = randomWeaponItem;
   weaponDamage__ = getDamage->second;
-  
-  return;
 }
 
 const std::string WeaponItem::getWeaponName()
@@ -116,13 +114,22 @@ PotionItem::PotionItem()
                        { "Potion of Agility", PotionStatus::potionOfAgility } };
 }
 
-const std::pair<std::string, int> PotionItem::getPotionItem()
+void PotionItem::getPotionItem()
 {
   std::string randomPotionItem = randomItemSelector( *this );
   auto getPotionStatus = allPotionItems__.find( randomPotionItem );
-  std::pair<std::string, int> chosenPotionItem = std::make_pair( randomPotionItem, getPotionStatus->second );
+  potionName__ = randomPotionItem;
+  potionStat__ = getPotionStatus->second;
+}
 
-  return chosenPotionItem;
+const std::string PotionItem::getPotionName()
+{
+  return potionName__;
+}
+
+const int PotionItem::getPotionStat()
+{
+  return potionStat__;
 }
 
 ArmorItem::ArmorItem()
@@ -133,13 +140,22 @@ ArmorItem::ArmorItem()
                       { "Steel Armor"  , ArmorDefense::steelArmor   } };
 }
 
-const std::pair<std::string, int> ArmorItem::getArmorItem()
+void ArmorItem::getArmorItem()
 {
   std::string randomArmorItem = randomItemSelector( *this );
   auto getArmorDefense = allArmorItems__.find( randomArmorItem );
-  std::pair<std::string, int> chosenArmorItem = std::make_pair( randomArmorItem, getArmorDefense->second );
+  armorName__ = randomArmorItem;
+  armorDefense__ = getArmorDefense->second;
+}
 
-  return chosenArmorItem;
+const std::string ArmorItem::getArmorName()
+{
+  return armorName__;
+}
+
+const int ArmorItem::getArmorDefense()
+{
+  return armorDefense__;
 }
 
 ShieldItem::ShieldItem()
@@ -150,11 +166,20 @@ ShieldItem::ShieldItem()
                        { "Steel Shield", ShieldDamageNegation::steelShield   } };
 }
 
-const std::pair<std::string, int> ShieldItem::getShieldItem()
+void ShieldItem::getShieldItem()
 {
   std::string randomShieldItem = randomItemSelector( *this );
   auto getShieldDamageNegationStat = allShieldItems__.find( randomShieldItem );
-  std::pair<std::string, int> chosenShieldItem = std::make_pair( randomShieldItem, getShieldDamageNegationStat->second );
+  shieldName__ = randomShieldItem;
+  shieldNegation__ = getShieldDamageNegationStat->second;
+}
 
-  return chosenShieldItem;
+const std::string ShieldItem::getShieldName()
+{
+  return shieldName__;
+}
+
+const int ShieldItem::getShieldNegation()
+{
+  return shieldNegation__;
 }

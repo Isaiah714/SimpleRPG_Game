@@ -1,4 +1,3 @@
-#include "ASCII_animation.hpp"
 #include "gamepanel.hpp"
 
 int main()

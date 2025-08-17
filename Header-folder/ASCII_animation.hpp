@@ -9,6 +9,8 @@
 #include <chrono>
 #include <thread>
 
+#include "gamepanel.hpp"
+
 #define FRAME_SIZE 21
 
 class FrameContainer
@@ -34,9 +36,9 @@ class Frame
   private:
   const std::string filePath__;
   std::string frameBuffer__;
-  bool runLoop__;
-
   std::vector<FrameContainer> allFrames__;
+
+  const std::string printGameDialog() const;
 
   void readFile();
 };
