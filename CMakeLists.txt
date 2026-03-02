@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.28.3)
 
 project(SimpleRPG_Game)
 
-add_executable(play Cpp-Folder/main.cpp
-                    Cpp-Folder/items.cpp
-                    Cpp-Folder/enemies.cpp
-                    Cpp-Folder/gamepanel.cpp
-                    Cpp-Folder/ASCII_animation.cpp)
+add_executable(play src/main.cpp
+                    src/items.cpp
+                    src/enemies.cpp
+                    src/gamepanel.cpp
+                    src/ASCII_animation.cpp)
 
-target_include_directories(play PRIVATE Header-folder)
+target_include_directories(play PRIVATE include)
