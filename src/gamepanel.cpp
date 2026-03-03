@@ -1,3 +1,5 @@
+#include <array>
+
 #include "gamepanel.hpp"
 #include "ASCII_animation.hpp"
 #include "enemies.hpp"
@@ -8,7 +10,7 @@ void gamePanel()
   if( currentStage == "Menu" )
   {
     std::cout << "\x1B[2J\x1B[H";
-    //animation("../ASCII-Frames/Menu/Title.txt");
+    animation("../ASCII-Frames/Menu/Title.txt");
     char input{};
     std::cout << "\n\t\t    Start Game?\n";
     std::cin >> input;
@@ -32,6 +34,10 @@ void gamePanel()
 
 void givePlayerSetOfItems()
 {
+  std::array<std::string, 4> allPotionNames = { "Potion of Healing",
+                                                "Potion of Steel",
+                                                "Potion of Might",
+                                                "Potion of Agility" };
   WeaponItem wep;
   wep.getWeaponItem();
   std::pair<std::string, int> weapon = std::make_pair( wep.getWeaponName(), wep.getWeaponDamage() );
@@ -41,6 +47,8 @@ void givePlayerSetOfItems()
   pot.getPotionItem();
   std::pair<std::string, int> potion = std::make_pair( pot.getPotionName(), pot.getPotionStat() );
   playerInventory.at(1) = potion;
+
+  
 
   ArmorItem arm;
   arm.getArmorItem();
@@ -56,7 +64,7 @@ void givePlayerSetOfItems()
             << weapon.first << "\nIt does "
             << weapon.second << " damage.\n\n"
             << "You got a "
-            << potion.first << "\nThe stat is "
+            << potion.first << "\nThe stat is +"
             << potion.second << "\n\n"
             << "You got "
             << armor.first << "\nIts defense stat is "
