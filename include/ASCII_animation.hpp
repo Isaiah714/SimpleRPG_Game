@@ -9,6 +9,8 @@
 #include <chrono>
 #include <thread>
 
+#include "gamepanel.hpp"
+
 #define FRAME_SIZE 21
 
 class FrameContainer
@@ -27,16 +29,18 @@ class Frame
   Frame();
   Frame( const std::string & filePath );
 
-  friend std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer);
+  GameDialog * getDialog();
+  void setDialog( GameDialog & dialog );
 
-  void testFunction();
+  friend std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer);
 
   private:
   const std::string filePath__;
   std::string frameBuffer__;
   std::vector<FrameContainer> allFrames__;
+  GameDialog * dialog__;
 
-  const std::string printGameDialog() const;
+  const std::string printGameDialog();
 
   void readFile();
 };
