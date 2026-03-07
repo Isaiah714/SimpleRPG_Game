@@ -6,11 +6,12 @@
 
 void gamePanel() 
 {
+  GameDialog log;
   std::string currentStage = "Menu";
   if( currentStage == "Menu" )
   {
-    std::cout << "\x1B[2J\x1B[H";
-    animation("../ASCII-Frames/Menu/Title.txt");
+    std::cout << "\033[2J\033[1;1H";
+    animation("../ASCII_Frames/Menu/Title.txt", log);
     char input{};
     std::cout << "\n\t\t    Start Game?\n";
     std::cin >> input;
@@ -18,8 +19,8 @@ void gamePanel()
   }
   if( currentStage == "Items" )
   {
-    std::cout << "\x1B[2J\x1B[H";
-    givePlayerSetOfItems();
+    std::cout << "\033[2J\033[1;1H";
+    givePlayerSetOfItems( log );
     char input{};
     std::cout << "Enter any character to continue...";
     std::cin >> input;
@@ -27,12 +28,12 @@ void gamePanel()
   }
   if( currentStage == "Stage 1" )
   {
-    animation("../ASCII-Frames/Plains/Slime_Encounter.txt");
-    spawnEnemy<Plains>( currentStage );
+    spawnEnemy<Plains>( currentStage, log );
+    animation("../ASCII_Frames/Plains/Slime_Encounter.txt", log);
   }
 }
 
-void givePlayerSetOfItems()
+void givePlayerSetOfItems( GameDialog & dialog )
 {
   std::array<std::string, 4> allPotionNames = { "Potion of Healing",
                                                 "Potion of Steel",
@@ -71,16 +72,19 @@ void givePlayerSetOfItems()
             << armor.second << "\n\n"
             << "You got a "
             << shield.first << "\nIt negates "
-            << shield.second << " damage\n\n";  
+            << shield.second << " damage\n\n";
+
+  dialog.printInventory = std::make_unique<Inventory>(playerInventory);
 }
 
 template<typename T>
-void spawnEnemy( const std::string & stage )
+void spawnEnemy( const std::string & stage, GameDialog & dialog )
 {
   Enemy obj;
   obj.getEnemy<T>( stage );
 
-  std::cout << "#################################################\n\n";
+  //std::cout << "#################################################\n\n";
+  //std::cout << "\033[2J\033[1;1H";
 
   std::cout << "You have encountered a " << obj.getName()
             << "\n\nIt has " << obj.getHealth() << " health points"
@@ -89,9 +93,10 @@ void spawnEnemy( const std::string & stage )
             << " damage"
             << "\n\nIts special attack is " << obj.getSpecialAttack()
             << " points\n";
+  dialog.printEnemy = std::make_unique<Enemy>( std::move(obj) );
 }
 
-void animation( const std::string & filePath )
+void animation( const std::string & filePath, GameDialog & dialog )
 {
   Frame stream( filePath );
   std::cout << stream;
