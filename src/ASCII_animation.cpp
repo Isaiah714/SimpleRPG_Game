@@ -53,12 +53,26 @@ void Frame::readFile()
   }
 }
 
-const std::string Frame::printGameDialog() const
+void Frame::setDialog( GameDialog & dialog)
 {
-  std::string dialog = "You have encountered a ";
-  return dialog;
+  dialog__ = &dialog;
 }
 
+GameDialog * Frame::getDialog()
+{
+  return dialog__;
+}
+
+/////////////////////////////DISPLAYS GAME DIALOG/////////////////////////////
+const std::string Frame::printGameDialog()
+{
+  GameDialog * d = getDialog();
+  std::string outputDialog = d->printEnemy->getName();
+  return outputDialog;
+}
+//////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////DISPLAYING THE GAME LOOP///////////////////////////
 std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer )
 {
   frameBuffer.readFile();
@@ -81,10 +95,4 @@ std::ostream & operator<<( std::ostream & stream, Frame & frameBuffer )
   }
   return stream;
 }
-
-void Frame::testFunction()
-{
-  readFile();
-    std::cout << allFrames__.at( 2 ).frame << '\n';
-    std::cout << "Current vector size " << allFrames__.size() << '\n';
-}
+//////////////////////////////////////////////////////////////////////////////
