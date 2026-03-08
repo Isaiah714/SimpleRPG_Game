@@ -15,7 +15,6 @@
 #define FRAME_SIZE 21
 
 using Inventory = std::array<std::pair<std::string, int>, 4>;
-//using EnemyAt = std::array<std::string, 5>;
 
 inline std::array<std::pair<std::string, int>, 4> playerInventory;
 inline std::array<std::string, 5> enemyAttributes;
@@ -23,9 +22,10 @@ inline std::array<std::string, 5> enemyAttributes;
 
 struct GameDialog
 {
-  std::string statement;
   std::unique_ptr<Inventory> printInventory;
   std::unique_ptr<Enemy> printEnemy;
+  bool isEnemyTurn;
+  bool isPlayerTurn;
 };
 
 void gamePanel();
