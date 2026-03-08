@@ -1,7 +1,7 @@
 #include <array>
 
 #include "gamepanel.hpp"
-#include "ASCII_animation.hpp"
+#include "gameloop.hpp"
 #include "enemies.hpp"
 
 void gamePanel() 
@@ -28,6 +28,7 @@ void gamePanel()
   }
   if( currentStage == "Stage 1" )
   {
+    log.isEnemyTurn = true;
     spawnEnemy<Plains>( currentStage, log );
     animation("../ASCII_Frames/Plains/Slime_Encounter.txt", log);
   }
@@ -82,22 +83,12 @@ void spawnEnemy( const std::string & stage, GameDialog & dialog )
 {
   Enemy obj;
   obj.getEnemy<T>( stage );
-
-  //std::cout << "#################################################\n\n";
-  //std::cout << "\033[2J\033[1;1H";
-
-  std::cout << "You have encountered a " << obj.getName()
-            << "\n\nIt has " << obj.getHealth() << " health points"
-            << "\n\nIts attack deals " << obj.getAttack() << " damage"
-            << "\n\nIts critical attack deals " << obj.getCriticalAttack()
-            << " damage"
-            << "\n\nIts special attack is " << obj.getSpecialAttack()
-            << " points\n";
   dialog.printEnemy = std::make_unique<Enemy>( std::move(obj) );
 }
 
 void animation( const std::string & filePath, GameDialog & dialog )
 {
-  Frame stream( filePath );
+  GameLoop stream( filePath );
+  stream.setDialog( dialog );
   std::cout << stream;
 }
