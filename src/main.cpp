@@ -2,8 +2,6 @@
 
 int main()
 {
-
   gamePanel();
-
   return 0;
 }
