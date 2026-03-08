@@ -6,6 +6,6 @@ add_executable(play src/main.cpp
                     src/items.cpp
                     src/enemies.cpp
                     src/gamepanel.cpp
-                    src/ASCII_animation.cpp)
+                    src/gameloop.cpp)
 
 target_include_directories(play PRIVATE include)
