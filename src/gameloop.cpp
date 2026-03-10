@@ -58,13 +58,13 @@ void GameLoop::setDialog( GameDialog & dialog)
   dialog__ = &dialog;
 }
 
-GameDialog * GameLoop::getDialog()
+GameDialog * GameLoop::getDialog() const
 {
   return dialog__;
 }
 
 /////////////////////////////DISPLAYS GAME DIALOG/////////////////////////////
-const std::string GameLoop::printGameDialog() &
+const std::string GameLoop::printGameDialog() const
 {
   GameDialog * dialog = getDialog();
   std::string outputDialog{};
@@ -107,7 +107,7 @@ std::ostream & operator<<( std::ostream & stream, GameLoop & frameBuffer )
     int incrementFrame{};
     while( true )
     {
-      std::cout << "\x1B[2J\x1B[H";
+      //std::cout << "\x1B[2J\x1B[H"; - ncurses should take care of this with their refresh function
       stream << "\n\n\n\n\n\n\n\n" << frameBuffer.printGameDialog() << '\n'
              << frameBuffer.allFrames__.at( incrementFrame ).frame;
       std::this_thread::sleep_for( std::chrono::milliseconds( 200 ) );
@@ -118,3 +118,26 @@ std::ostream & operator<<( std::ostream & stream, GameLoop & frameBuffer )
   return stream;
 }
 //////////////////////////////////////////////////////////////////////////////
+
+void GameLoop::displayGameLoop() const
+{
+  //this->readFile();
+  if( this->allFrames__.size() == 1 )
+  {
+    //stream << this->allFrames__.at( 0 ).frame;
+  }
+  else if( this->allFrames__.size() > 1 )
+  {
+    int incrementFrame{};
+    while( true )
+    {
+      //std::cout << "\x1B[2J\x1B[H"; - ncurses should take care of this with their refresh function
+      // use printw();
+      std::cout << "\n\n\n\n\n\n\n\n" << this->printGameDialog() << '\n'
+             << this->allFrames__.at( incrementFrame ).frame;
+      std::this_thread::sleep_for( std::chrono::milliseconds( 200 ) );
+      ++incrementFrame;
+      if( incrementFrame == this->allFrames__.size() ) { incrementFrame = 0; }
+    }
+  }
+}
