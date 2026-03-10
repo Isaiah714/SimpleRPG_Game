@@ -29,10 +29,11 @@ class GameLoop
   GameLoop();
   GameLoop( const std::string & filePath );
 
-  GameDialog * getDialog();
+  GameDialog * getDialog() const;
   void setDialog( GameDialog & dialog );
 
   friend std::ostream & operator<<( std::ostream & stream, GameLoop & frameBuffer);
+  void displayGameLoop() const;
 
   private:
   const std::string filePath__;
@@ -40,7 +41,7 @@ class GameLoop
   std::vector<FrameContainer> allFrames__;
   GameDialog * dialog__;
 
-  const std::string printGameDialog() &;  
+  const std::string printGameDialog() const;  
 
   void readFile();
 };
