@@ -9,3 +9,4 @@ add_executable(play src/main.cpp
                     src/gameloop.cpp)
 
 target_include_directories(play PRIVATE include)
+target_link_libraries(play PRIVATE ncursesw)
