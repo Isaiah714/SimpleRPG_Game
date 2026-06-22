@@ -1,22 +1,23 @@
-#include "gamepanel.hpp"
+/*#include "gamepanel.hpp"
 
 int main()
 {
   gamePanel();
   return 0;
-}
+}*/
 
 #include <ncurses.h>
 
 // Testing with ncurses
-/*int main()
+int main()
 {
-  GameDialog def;
+  //GameDialog def;
   initscr();
-  printw("Hello World");
-  animation("../ASCII_Frames/Menu/Title.txt", def);
+  printw("Hello World\n");
+  printw("Different position from screen\n");
+  //animation("../ASCII_Frames/Menu/Title.txt", def);
   refresh();
   getch();
   endwin();
   return 0;
-}*/
+}
