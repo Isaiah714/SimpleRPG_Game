@@ -1,6 +1,6 @@
 #include "enemies.hpp"
 
-Enemy::Enemy() {}
+Enemy::~Enemy() {}
 
 template<typename T> 
 std::vector<T> Enemy::collectStageEnemies( const std::string & stage )

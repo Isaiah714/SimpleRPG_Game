@@ -6,10 +6,31 @@
 
 #include "items.hpp"
 
+enum EnemyType
+{
+  SLIME,
+  TALLSLIME,
+  PILEOFDIRT,
+  BUTTERCUP,
+  PURPLEZOMBIE,
+  SHINYSKELETON,
+  WONDERINGTREE,
+  LOSTGNOME,
+  GIANTSPIDER,
+  FLESHROCK,
+  ISOLATEDWIZARD,
+  GIANTBLOODWORM,
+  GRAFTEDSOLDIER,
+  DARKWITCH,
+  STEELKNIGHT,
+  PRIMEGRIFFIS
+};
+
 class Enemy : public Random
 {
   public:
-  Enemy();
+  Enemy() = default;
+ ~Enemy();
 
   template<typename T>
   void getEnemy( const std::string & stage );
@@ -21,6 +42,7 @@ class Enemy : public Random
   const int getSpecialAttack();
   
   private:
+  EnemyType type;
   std::string enemyName__;
   int enemyHealth__;
   int enemyAttack__; 
@@ -47,8 +69,9 @@ enum PlainEnemyAttributes
 class Plains : public Enemy
 {
   public:
-  Plains();
+  Plains() = default;
   Plains( const std::string enemyName, int health, int attack );
+ ~Plains();
   std::string getName();
   const int getHealth();
   const int getAttack();
@@ -78,8 +101,9 @@ enum ForestEnemyAttributes
 class Forest : public Enemy
 {
   public:
-  Forest();
+  Forest() = default;
   Forest( const std::string enemyName, int health, int attack );
+ ~Forest();
   const std::string getName() const;
   const int getHealth();
   const int getAttack();
@@ -107,8 +131,9 @@ enum CaveEnemyAttributes
 class Cave : public Enemy
 {
   public:
-  Cave();
+  Cave() = default;
   Cave( const std::string enemyName, int health, int attack );
+ ~Cave();
   const std::string getName() const;
   const int getHealth();
   const int getAttack();
@@ -136,8 +161,9 @@ enum ShoreEnemyAttributes
 class Shore : public Enemy
 {
   public:
-  Shore();
+  Shore() = default;
   Shore( const std::string enemyName, int health, int attack );
+ ~Shore();
   const std::string getName() const;
   const int getHealth();
   const int getAttack();
